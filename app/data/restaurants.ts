@@ -1,5 +1,6 @@
 export type Product = {
   id: string;
+  code: string;
   categoryId: string;
   name: string;
   description: string;
@@ -58,6 +59,7 @@ export const restaurants: Restaurant[] = [
     products: [
       {
         id: "tradicional-na-brasa",
+        code: "PAO-001",
         categoryId: "classicos",
         name: "Tradicional na Brasa",
         description:
@@ -66,6 +68,7 @@ export const restaurants: Restaurant[] = [
       },
       {
         id: "queijo-da-casa",
+        code: "PAO-002",
         categoryId: "classicos",
         name: "Queijo da Casa",
         description:
@@ -74,6 +77,7 @@ export const restaurants: Restaurant[] = [
       },
       {
         id: "calabresa-cremosa",
+        code: "PAO-003",
         categoryId: "recheados",
         name: "Calabresa Cremosa",
         description:
@@ -82,6 +86,7 @@ export const restaurants: Restaurant[] = [
       },
       {
         id: "frango-com-catupiry",
+        code: "PAO-004",
         categoryId: "recheados",
         name: "Frango com Catupiry",
         description:
@@ -90,6 +95,7 @@ export const restaurants: Restaurant[] = [
       },
       {
         id: "combo-churrasco",
+        code: "PAO-005",
         categoryId: "combos",
         name: "Combo Churrasco",
         description:
@@ -98,6 +104,7 @@ export const restaurants: Restaurant[] = [
       },
       {
         id: "combo-familia",
+        code: "PAO-006",
         categoryId: "combos",
         name: "Combo Familia",
         description:
@@ -112,7 +119,7 @@ export const restaurants: Restaurant[] = [
     name: "Acai da Maria",
     description:
       "Acai cremoso montado na hora, com frutas frescas, toppings crocantes e combinacoes para todos os apetites.",
-    whatsapp: "5511988882222",
+    whatsapp: "5511999992222",
     instagram: "@acaidamaria",
     address: "Avenida Tropical, 88 - Jardim Primavera, Sao Paulo - SP",
     deliveryFee: 4.5,
@@ -137,6 +144,7 @@ export const restaurants: Restaurant[] = [
     products: [
       {
         id: "copo-pequeno",
+        code: "ACA-001",
         categoryId: "copos",
         name: "Copo Pequeno",
         description:
@@ -145,6 +153,7 @@ export const restaurants: Restaurant[] = [
       },
       {
         id: "copo-medio",
+        code: "ACA-002",
         categoryId: "copos",
         name: "Copo Medio",
         description:
@@ -153,6 +162,7 @@ export const restaurants: Restaurant[] = [
       },
       {
         id: "copo-tropical",
+        code: "ACA-003",
         categoryId: "copos",
         name: "Copo Tropical",
         description:
@@ -161,6 +171,7 @@ export const restaurants: Restaurant[] = [
       },
       {
         id: "barca-dupla",
+        code: "ACA-004",
         categoryId: "barcas",
         name: "Barca Dupla",
         description:
@@ -169,6 +180,7 @@ export const restaurants: Restaurant[] = [
       },
       {
         id: "barca-familia",
+        code: "ACA-005",
         categoryId: "barcas",
         name: "Barca Familia",
         description:
@@ -177,6 +189,7 @@ export const restaurants: Restaurant[] = [
       },
       {
         id: "extra-pacoca",
+        code: "ACA-006",
         categoryId: "adicionais",
         name: "Pacoca",
         description: "Porcao extra de pacoca esfarelada.",
@@ -184,6 +197,7 @@ export const restaurants: Restaurant[] = [
       },
       {
         id: "extra-creme-avela",
+        code: "ACA-007",
         categoryId: "adicionais",
         name: "Creme de Avela",
         description: "Camada extra de creme de avela.",
