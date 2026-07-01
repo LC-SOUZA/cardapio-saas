@@ -76,7 +76,6 @@ export async function getRestaurantBySlug(
         "id, business_id, category_id, code, name, description, price, is_available, sort_order, created_at",
       )
       .eq("business_id", businessRow.id)
-      .eq("is_available", true)
       .order("sort_order", { ascending: true }),
   ]);
 

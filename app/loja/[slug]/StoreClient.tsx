@@ -175,6 +175,11 @@ export default function StoreClient({ restaurant }: StoreClientProps) {
   }
 
   function addToCart(product: Product) {
+    if (product.available === false) {
+      setToast("Produto indisponivel no momento");
+      return;
+    }
+
     setCart((current) => {
       const itemExists = current.some(
         (item) => item.product.id === product.id,
@@ -405,7 +410,7 @@ export default function StoreClient({ restaurant }: StoreClientProps) {
                 </h2>
               </div>
               <p className="hidden text-sm font-medium text-zinc-500 sm:block">
-                {restaurant.products.length} itens disponiveis
+                {restaurant.products.length} itens no cardapio
               </p>
             </div>
 
@@ -442,39 +447,57 @@ export default function StoreClient({ restaurant }: StoreClientProps) {
                   </div>
 
                   <div className="grid gap-4 md:grid-cols-2">
-                    {products.map((product) => (
-                      <article
-                        key={product.id}
-                        className="grid gap-4 rounded-lg border border-zinc-200 bg-white p-4 shadow-sm"
-                      >
-                        <div className="flex items-start justify-between gap-4">
-                          <div>
-                            <p className="text-xs font-bold uppercase tracking-[0.12em] text-zinc-400">
-                              {product.code}
-                            </p>
-                            <h3 className="mt-1 text-lg font-extrabold">
-                              {product.name}
-                            </h3>
-                            <p className="mt-2 text-sm leading-6 text-zinc-600">
-                              {product.description}
+                    {products.map((product) => {
+                      const isAvailable = product.available !== false;
+
+                      return (
+                        <article
+                          key={product.id}
+                          className={`grid gap-4 rounded-lg border border-zinc-200 bg-white p-4 shadow-sm ${
+                            isAvailable ? "" : "opacity-60"
+                          }`}
+                        >
+                          <div className="flex items-start justify-between gap-4">
+                            <div>
+                              <p className="text-xs font-bold uppercase tracking-[0.12em] text-zinc-400">
+                                {product.code}
+                              </p>
+                              <h3 className="mt-1 text-lg font-extrabold">
+                                {product.name}
+                              </h3>
+                              <p className="mt-2 text-sm leading-6 text-zinc-600">
+                                {product.description}
+                              </p>
+                              {!isAvailable ? (
+                                <p className="mt-3 text-sm font-black text-rose-700">
+                                  Indisponivel no momento
+                                </p>
+                              ) : null}
+                            </div>
+                            <p className="shrink-0 text-base font-black">
+                              {formatCurrency(product.price)}
                             </p>
                           </div>
-                          <p className="shrink-0 text-base font-black">
-                            {formatCurrency(product.price)}
-                          </p>
-                        </div>
 
-                        <button
-                          type="button"
-                          onClick={() => addToCart(product)}
-                          className={`rounded-lg px-4 py-3 text-sm font-bold transition ${visual.button}`}
-                        >
-                          {recentlyAddedProductId === product.id
-                            ? "Adicionado!"
-                            : "Adicionar ao pedido"}
-                        </button>
-                      </article>
-                    ))}
+                          <button
+                            type="button"
+                            disabled={!isAvailable}
+                            onClick={() => addToCart(product)}
+                            className={`rounded-lg px-4 py-3 text-sm font-bold transition ${
+                              isAvailable
+                                ? visual.button
+                                : "cursor-not-allowed bg-zinc-200 text-zinc-500"
+                            }`}
+                          >
+                            {!isAvailable
+                              ? "Indisponivel no momento"
+                              : recentlyAddedProductId === product.id
+                                ? "Adicionado!"
+                                : "Adicionar ao pedido"}
+                          </button>
+                        </article>
+                      );
+                    })}
                   </div>
                 </section>
               );
