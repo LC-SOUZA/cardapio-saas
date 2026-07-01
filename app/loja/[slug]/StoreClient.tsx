@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { Product, Restaurant } from "../../data/restaurants";
-import { formatCurrency } from "../../data/restaurants";
+import { formatCurrency } from "../../lib/format";
+import type { Product, Restaurant } from "../../lib/store-types";
 
 type StoreClientProps = {
   restaurant: Restaurant;
@@ -95,6 +95,13 @@ export default function StoreClient({ restaurant }: StoreClientProps) {
 
   const visual =
     storeVisuals[restaurant.slug] ?? buildFallbackVisual(restaurant.name);
+  const logo = restaurant.logoEmoji || visual.logo;
+  const heroStyle =
+    restaurant.primaryColor && restaurant.secondaryColor
+      ? {
+          backgroundImage: `linear-gradient(135deg, ${restaurant.primaryColor}, ${restaurant.secondaryColor})`,
+        }
+      : undefined;
 
   const instagramHandle = restaurant.instagram.replace("@", "");
   const whatsappUrl = `https://wa.me/${restaurant.whatsapp}`;
@@ -300,7 +307,12 @@ export default function StoreClient({ restaurant }: StoreClientProps) {
         cart.length > 0 ? "pb-36 lg:pb-0" : "pb-0"
       }`}
     >
-      <section className={`bg-gradient-to-br ${visual.gradient} text-white`}>
+      <section
+        className={`${
+          heroStyle ? "" : `bg-gradient-to-br ${visual.gradient}`
+        } text-white`}
+        style={heroStyle}
+      >
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
             <a
@@ -328,7 +340,7 @@ export default function StoreClient({ restaurant }: StoreClientProps) {
           <div className="grid gap-8 py-6 md:grid-cols-[1fr_280px] md:items-end">
             <div className="flex max-w-3xl flex-col gap-5">
               <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-white text-5xl shadow-lg shadow-black/10">
-                {visual.logo}
+                {logo}
               </div>
               <div className="flex flex-col gap-3">
                 <p className="text-sm font-semibold uppercase tracking-[0.16em] text-white/80">

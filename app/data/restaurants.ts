@@ -210,10 +210,3 @@ export const restaurants: Restaurant[] = [
 export function getRestaurantBySlug(slug: string) {
   return restaurants.find((restaurant) => restaurant.slug === slug);
 }
-
-export function formatCurrency(value: number) {
-  return new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  }).format(value);
-}
